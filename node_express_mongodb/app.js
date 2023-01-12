@@ -1,5 +1,2 @@
-// import module
-const logDirname = require("./functions");
-
-console.log(logDirname);
-logDirname();
+// this will execute code from 'other_file.js'
+require("./other_file");
