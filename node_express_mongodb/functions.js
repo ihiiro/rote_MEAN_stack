@@ -1,7 +1,4 @@
-// arrow syntax function definition
-const logDirname = () => {
+// alternative syntax (export-as-you-go)
+module.exports = () => {
   console.log(__dirname);
 };
-
-// necessary for exposing local symbols to exporters
-module.exports = logDirname;
