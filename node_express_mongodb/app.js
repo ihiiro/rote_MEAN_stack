@@ -1,2 +1,5 @@
-console.log(__dirname);
-console.log(__filename);
+// import module
+const logDirname = require("./functions");
+
+console.log(logDirname);
+logDirname();
