@@ -1,0 +1,19 @@
+*SPAs(single-page applications) are not crawlable, and that is because the HTML
+is rendered via javascript(angularJS for example), the only information
+available to search engines is the information delivered by the server, and so
+since search engines do not execute javascript, only the non-templated HTML
+will be available to crawlers.
+
+*the MEAN stack stands for Mongodb, Express.js, AngularJS, node.js.
+
+*the MEAN stack's flexibility allows for the implementation of different
+architectures each serving a particular set of needs, a best practice is to
+build a uniform internal API which will be shared by all of the different
+architectures, this will streamline maintainability as it will not require
+building different API integrations to the database.
+
+*design/planning steps:
+  1) write static mockup pages to figure out the needed data and user-journey
+  2) move the fake data to a database
+  3) build a REST API connecting the application to the database (data-driven)
+  4) finishing the product (authentication, application logic etc...).
