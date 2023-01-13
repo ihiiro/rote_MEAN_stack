@@ -1,20 +1,30 @@
-const os = require('os');
+const fs = require('fs');
 
-console.log(os.userInfo());
+/* synchronous */
 
-console.log("\n");
+// reading
+console.log(fs.readFileSync('../cli.txt', 'utf8'));
+console.log(fs.readFileSync('../notes.txt', 'utf8'));
 
-// number of seconds the computer has been running
-// the expression gets time in hours
-console.log(`The computer has been running for ~${Math.round(os.uptime()/3600)}hours.`);
+// writing
+// flag: 'a' is for appending
+fs.writeFileSync('../new_file.txt', 'there ya go!'/*, { flag: 'a' }*/);
 
-console.log("\n");
 
-const os_info = {
-  type: os.type(),
-  release: os.release(),
-  totalmem: `~${Math.round(os.totalmem()/1073741824)}GB`,
-  freemem: `~${Math.round(os.freemem()/1073741824)}GB`,
-};
+/* asynchronous */
 
-console.log(os_info);
+fs.readFile('../new_file.txt', 'utf8', (err, result) => {
+  if (err) {
+    console.log(err);
+    return;
+  }
+
+  console.log(result);
+});
+
+fs.writeFile('../new_file1.txt', 'another file, howdy!', /*{flag:'a'},*/ (err, result) => {
+  if (err) {
+    console.log(err);
+    return;
+  }
+});
