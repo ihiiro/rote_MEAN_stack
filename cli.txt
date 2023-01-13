@@ -5,3 +5,5 @@ install npm package locally: npm i (or: install) package-name
 install dependencies written in package.json: npm i (or: install)
 install package as dev dependency: npm i package-name --save-dev (or: -D)
 uninstall package: npm uninstall package-name
+run a particular command using npm aliasing: npm run alias
+  (alias is found in script object inside package.json)
