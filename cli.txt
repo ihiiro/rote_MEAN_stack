@@ -3,3 +3,4 @@ nodejs repl: node
 generate package.json file: npm init (-y for default values)
 install npm package locally: npm i (or: install) package-name
 install dependencies written in package.json: npm i (or: install)
+install package as dev dependency: npm i package-name --save-dev (or: -D)
