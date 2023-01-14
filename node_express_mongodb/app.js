@@ -23,7 +23,6 @@ app.get('/type', (req, res) => {
 
 // send file
 app.get('/htmlfile', (req, res) => {
-  //
   res.status(200).sendFile(path.resolve(__dirname, './html_file.html'));
 });
 
@@ -34,6 +33,26 @@ app.get('/apis/json', (req, res) => {
 app.get('/apis/users', (req, res) => {
   res.status(200).json(users);
 });
+
+// url parameters
+// :parameter
+app.get('/greet:name', (req, res) => {
+  res.send(`Greetings ${req.params.name}!`);
+});
+
+// url queries
+// example query: /apis/users/user?username=yassir&age=20
+app.get('/apis/users/user', (req, res) => {
+  const query_username = req.query.username;
+  const query_age = req.query.age;
+
+  const user_object = users.filter((user) => {
+    return user.username === query_username && user.age === Number(query_age);
+  });
+
+  res.status(200).json(user_object)
+});
+
 
 // error page for when accessing invalid resources
 app.all('*', (req, res) => {
