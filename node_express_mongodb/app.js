@@ -1,21 +1,25 @@
-const event_emitter = require('events');
+const express = require('express');
+const os = require('os');
 
-const custom_emitter = new event_emitter();
+const app = express();
 
-// setup event output
-custom_emitter.on('response', () => {
-  console.log("Event \"response\" has been emitted");
+app.get('/', (req, res) => {
+  res.status(200).send(`SERVER UPTIME: ~${Math.round(os.uptime()/3600)} hours <br><br> SERVER TYPE: ${os.type()}`);
 });
 
-// multiple callbacks for the same event
-custom_emitter.on('response', () => {
-  console.log("Event \"response\" has been EMITTED");
+app.get('/uptime', (req, res) => {
+  res.status(200).send(`SERVER UPTIME: ~${Math.round(os.uptime()/3600)} hours`);
 });
 
-// callback with parameters
-custom_emitter.on('response', (username) => {
-  console.log(`Hi ${username}!`);
+app.get('/type', (req, res) => {
+  res.status(200).send(`SERVER TYPE: ${os.type()}`);
 });
 
-// trigger event
-custom_emitter.emit('response', "Yassir");
+// error page for when accessing invalid resources
+app.all('*', (req, res) => {
+  res.status(404).send('invalid url.');
+});
+
+app.listen(8080, () => {
+  console.log('server is listening on port 8080...');
+});
