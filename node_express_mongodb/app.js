@@ -2,6 +2,8 @@ const express = require('express');
 const os = require('os');
 const path = require('path');
 
+const users = require('./users.js');
+
 const app = express();
 
 // provide static files directory
@@ -23,6 +25,14 @@ app.get('/type', (req, res) => {
 app.get('/htmlfile', (req, res) => {
   //
   res.status(200).sendFile(path.resolve(__dirname, './html_file.html'));
+});
+
+// send json
+app.get('/apis/json', (req, res) => {
+  res.status(200).json([{name:'yassir'}, {age: 20}]);
+});
+app.get('/apis/users', (req, res) => {
+  res.status(200).json(users);
 });
 
 // error page for when accessing invalid resources
