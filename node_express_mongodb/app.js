@@ -2,29 +2,22 @@ const express = require('express');
 
 const app = express();
 
-// req => middleware(logger) => res
-// it's best practice to put middleware in a separate file
-const logger = (req, res, next) => {
-  console.log(req.method, req.url, new Date());
-  next();
+app.use(express.static('./static'));
+app.use(express.urlencoded({ extended: false }));
+
+// middleware to check form validity
+const checkForm = (req, res, next) => {
+  if (req.body.username && req.body.message) {
+    next();
+  } else {
+    res.status(400).send('ERROR: INVALID FORM BODY');
+  }
 };
 
-app.use(logger);
-
-// for multiple middleware functions
-// execution order: FIFO(first in first out) so the order in the array matters
-// app.use([mw0, mw1, mwN])
-
-// method one: pass middleware explicitly
-app.get('/', logger, (req, res) => {
-  res.status(200).send('Home');
-});
-
-// method two: doing nothing cuz app.use() was used (no pun intended)
-app.get('/about', (req, res) => {
-  res.status(200).send('About');
+app.post('/message', checkForm, (req, res) => {
+  res.status(200).send(`<h3 style="font-family: monospace;">${req.body.username} says ${req.body.message}</h3>`);
 });
 
 app.listen(8080, () => {
-  console.log('server is listening on port 8080...');
+  console.log('server listening on port 8080...');
 });
